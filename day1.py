@@ -1,3 +1,5 @@
+from collections import Counter
+
 def fetch_input(filename):
     with open(filename, 'r') as f:
         return list(map(int, f.read().split()))
@@ -19,6 +21,16 @@ def process_and_compare (list1, list2):
         total_distance += diff
 
     return total_distance
+
+def count_similarity_score(right_list,left_list):
+    right_count = Counter(right_list)
+
+    similarity_score = 0
+
+    for num in left_list:
+        similarity_score += num * right_count[num]
+
+    return similarity_score
     
 
 def main():
@@ -26,7 +38,9 @@ def main():
     data = fetch_input(path)
     list1, list2 = parse_input(data)
     result = process_and_compare(list1, list2)
+    score = count_similarity_score(list1,list2)
     print("Sum of results: ", result)
+    print("Similarity Score: ", score)
 
 if __name__ == "__main__":
     main()
