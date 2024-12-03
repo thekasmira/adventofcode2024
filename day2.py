@@ -5,10 +5,7 @@ def fetch_input(filename):
 def is_safe_report(report):
     differences = [report[i + 1] - report[i] for i in range(len(report) - 1)]
 
-    if all(1 <= diff <= 3 for diff in differences):
-        return True
-    
-    if all(-3 <= diff <= -1 for diff in differences):
+    if all(1 <= diff <= 3 or -3 <= diff <= -1 for diff in differences):
         return True
     
     return False
